@@ -24,4 +24,4 @@ Then open http://localhost:3000. To keep data between restarts, run InfluxDB wit
 
 ## Deployment
 
-See [DEPLOY.md](DEPLOY.md): Docker Compose behind NGINX, on a single server.
+See [DEPLOY.md](DEPLOY.md): Docker Compose behind a Cloudflare Tunnel, on a single server.
