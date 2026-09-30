@@ -1,0 +1,82 @@
+@import "tailwindcss";
+
+/*
+ * Design tokens, after IBM's Carbon design system (white theme).
+ * Components only use these, never raw colours: re-theming happens here.
+ * `static` emits every token as a CSS variable, so charts (canvas) can read them too.
+ */
+@theme static {
+  --color-*: initial;
+  --color-white: #ffffff;
+  --color-transparent: transparent;
+  --color-current: currentColor;
+
+  --color-background: #ffffff;
+  --color-layer: #f4f4f4;
+  --color-layer-hover: #e8e8e8;
+  --color-layer-selected: #e0e0e0;
+  --color-line: #e0e0e0;
+  --color-line-strong: #8d8d8d;
+
+  --color-ink: #161616;
+  --color-ink-muted: #525252;
+  --color-ink-placeholder: #a8a8a8;
+  --color-ink-on-color: #ffffff;
+  --color-ink-disabled: #8d8d8d;
+
+  --color-shell: #161616;
+
+  --color-interactive: #0f62fe;
+  --color-interactive-hover: #0050e6;
+  --color-interactive-active: #002d9c;
+  --color-focus: #0f62fe;
+  --color-secondary: #393939;
+  --color-secondary-hover: #474747;
+  --color-danger: #da1e28;
+  --color-disabled: #c6c6c6;
+
+  --color-support-error: #da1e28;
+  --color-tag-gray-bg: #e0e0e0;
+  --color-tag-gray-ink: #161616;
+  --color-tag-red-bg: #ffd7d9;
+  --color-tag-red-ink: #a2191f;
+  --color-tag-blue-bg: #d0e2ff;
+  --color-tag-blue-ink: #0043ce;
+  --color-tag-green-bg: #a7f0ba;
+  --color-tag-green-ink: #0e6027;
+
+  /* Categorical data-visualisation palette, in the recommended order. */
+  --color-chart-1: #6929c4;
+  --color-chart-2: #1192e8;
+  --color-chart-3: #005d5d;
+  --color-chart-4: #9f1853;
+  --color-chart-5: #fa4d56;
+  --color-chart-6: #570408;
+  --color-chart-grid: #e0e0e0;
+  --color-chart-axis: #525252;
+
+  --font-sans: var(--font-plex-sans), ui-sans-serif, system-ui, sans-serif;
+
+  --animate-reveal: reveal 2.4s ease-out both;
+  @keyframes reveal {
+    from {
+      clip-path: inset(0 100% 0 0);
+    }
+    to {
+      clip-path: inset(0);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-reveal {
+    animation: none;
+  }
+}
+
+@layer base {
+  body {
+    @apply bg-background font-sans text-sm text-ink antialiased;
+    letter-spacing: 0.16px;
+  }
+}

@@ -1,0 +1,68 @@
+# Production stack. Configuration comes from .env (see .env.example), TLS from the host's NGINX
+# (see deploy/nginx/). Both services listen on 127.0.0.1 only: NGINX is the way in.
+#
+#   docker compose up -d --build
+#
+# (backend/docker-compose.yml is only InfluxDB, for local development.)
+name: polygraphe
+
+services:
+  influxdb:
+    image: influxdb:2.7
+    restart: unless-stopped
+    environment:
+      DOCKER_INFLUXDB_INIT_MODE: setup
+      DOCKER_INFLUXDB_INIT_USERNAME: admin
+      DOCKER_INFLUXDB_INIT_PASSWORD: ${INFLUX_ADMIN_PASSWORD:?set INFLUX_ADMIN_PASSWORD in .env}
+      DOCKER_INFLUXDB_INIT_ORG: polygraphe
+      DOCKER_INFLUXDB_INIT_BUCKET: raw
+      DOCKER_INFLUXDB_INIT_ADMIN_TOKEN: ${INFLUX_TOKEN:?set INFLUX_TOKEN in .env}
+    volumes:
+      - influxdb-data:/var/lib/influxdb2
+    healthcheck:
+      test: ["CMD", "influx", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  backend:
+    build: ./backend
+    restart: unless-stopped
+    depends_on:
+      influxdb:
+        condition: service_healthy
+    environment:
+      POLYGRAPHE_STORAGE_BACKEND: database
+      POLYGRAPHE_INFLUX_URL: http://influxdb:8086
+      POLYGRAPHE_INFLUX_TOKEN: ${INFLUX_TOKEN}
+      POLYGRAPHE_INFLUX_ORG: polygraphe
+      POLYGRAPHE_DEVICE_TOKEN: ${DEVICE_TOKEN:?set DEVICE_TOKEN in .env}
+      POLYGRAPHE_OPERATOR_PASSWORD: ${OPERATOR_PASSWORD:?set OPERATOR_PASSWORD in .env}
+      POLYGRAPHE_OPERATOR_SESSION_HOURS: ${OPERATOR_SESSION_HOURS:-12}
+      POLYGRAPHE_SECRET_KEY: ${SECRET_KEY:?set SECRET_KEY in .env}
+      POLYGRAPHE_DUMMY_ENABLED: ${DUMMY_ENABLED:-true}
+      # NGINX serves the backend under /api/ and strips the prefix.
+      POLYGRAPHE_ROOT_PATH: /api
+    volumes:
+      - backend-data:/data
+    ports:
+      - "127.0.0.1:${BACKEND_PORT:-8000}:8000"
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        NEXT_PUBLIC_API_URL: https://${DOMAIN:?set DOMAIN in .env}/api
+    restart: unless-stopped
+    depends_on:
+      backend:
+        condition: service_healthy
+    environment:
+      # Server-side calls stay inside Docker's network.
+      API_URL: http://backend:8000
+    ports:
+      - "127.0.0.1:${FRONTEND_PORT:-3000}:3000"
+
+volumes:
+  influxdb-data:
+  backend-data:

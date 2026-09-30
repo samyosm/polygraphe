@@ -1,0 +1,139 @@
+{
+  "metadata": {
+    "description": "Physiological measurements recorded during trials."
+  },
+  "header": {
+    "home": "PolyGraphe, home",
+    "trials": "Trials",
+    "language": "Language",
+    "un": "United Nations",
+    "icc": "International Criminal Court"
+  },
+  "hero": {
+    "eyebrow": "Engineering physics project",
+    "lead": "An oximeter turned experimental lie detector. Heart rate, SpO₂, breathing, sweat and skin conductance, recorded live.",
+    "madeBy": "Made by"
+  },
+  "trials": {
+    "title": "Trials",
+    "new": "New trial",
+    "emptyTitle": "No trials yet",
+    "emptyText": "Create a trial to start recording measurements.",
+    "searchLabel": "Search trials",
+    "searchPlaceholder": "Search by title or subject",
+    "noMatch": "No trial matches “{search}”.",
+    "columns": {
+      "title": "Title",
+      "subject": "Subject",
+      "status": "Status",
+      "created": "Created"
+    },
+    "created": "Created {date}",
+    "back": "Trials",
+    "edit": "Edit"
+  },
+  "status": {
+    "created": "Not started",
+    "recording": "Recording",
+    "paused": "Stopped",
+    "completed": "Saved"
+  },
+  "subject": {
+    "age": "{age, plural, one {# year} other {# years}}"
+  },
+  "sex": {
+    "female": "Female",
+    "male": "Male",
+    "other": "Other"
+  },
+  "form": {
+    "newTitle": "New trial",
+    "editTitle": "Edit trial",
+    "title": "Title",
+    "description": "Description",
+    "optional": "(optional)",
+    "subject": "Subject",
+    "name": "Name",
+    "age": "Age",
+    "sex": "Sex",
+    "culture": "Culture",
+    "cancel": "Cancel",
+    "create": "Create trial",
+    "creating": "Creating…",
+    "save": "Save changes",
+    "saving": "Saving…"
+  },
+  "controls": {
+    "device": "Device",
+    "waitingForDevice": "Waiting for a device…",
+    "start": "Start data intake",
+    "resume": "Resume",
+    "stop": "Stop",
+    "stopAndSave": "Stop and save",
+    "save": "Save"
+  },
+  "measurements": {
+    "raw": {
+      "title": "Raw data",
+      "caption": "As received from the device"
+    },
+    "processed": {
+      "title": "Processed data",
+      "caption": "Computed by the server"
+    },
+    "show": "Show",
+    "hide": "Hide",
+    "waiting": "Waiting for data…",
+    "noData": "No data.",
+    "live": "Live",
+    "connecting": "Connecting…"
+  },
+  "kinds": {
+    "heart_rate": "Heart rate",
+    "spo2": "SpO₂",
+    "breathing_rate": "Breathing rate",
+    "sweat": "Sweat",
+    "gsr": "Skin conductance",
+    "heart_rate_stats": "Heart rate, 30 s window",
+    "spo2_stats": "SpO₂, 30 s window"
+  },
+  "fields": {
+    "value": "Value",
+    "mean": "Mean",
+    "min": "Min",
+    "max": "Max",
+    "std": "Standard deviation",
+    "count": "Samples",
+    "rejected": "Rejected"
+  },
+  "errors": {
+    "titleRequired": "A title is required.",
+    "invalid": "Some fields are invalid.",
+    "conflict": "This action is not possible in the trial's current state, or the device is already in use.",
+    "unexpected": "The processing server returned an unexpected error.",
+    "notFound": "Not found",
+    "backToTrials": "Back to trials",
+    "genericTitle": "Something went wrong",
+    "serverDown": "Is the processing server running?",
+    "retry": "Try again",
+    "wrongPassword": "Wrong password.",
+    "unauthorized": "Operator mode has ended. Unlock it again."
+  },
+  "operator": {
+    "operator": "Operator",
+    "title": "Operator mode",
+    "hint": "Required to create, edit, start and stop trials. Watching needs nothing.",
+    "password": "Password",
+    "unlock": "Unlock",
+    "lock": "Lock",
+    "lockHint": "Leave operator mode",
+    "close": "Close",
+    "required": "Operator mode is required.",
+    "requiredHint": "Unlock it with the padlock at the top right."
+  },
+  "live": {
+    "title": "Live now",
+    "device": "Device {device}",
+    "open": "Open trial"
+  }
+}

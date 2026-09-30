@@ -1,0 +1,139 @@
+{
+  "metadata": {
+    "description": "Mesures physiologiques enregistrées pendant des essais."
+  },
+  "header": {
+    "home": "PolyGraphe, accueil",
+    "trials": "Essais",
+    "language": "Langue",
+    "un": "Organisation des Nations unies",
+    "icc": "Cour pénale internationale"
+  },
+  "hero": {
+    "eyebrow": "Projet de génie physique",
+    "lead": "Un oxymètre devenu détecteur de mensonges expérimental. Fréquence cardiaque, SpO₂, respiration, sudation et conductance cutanée, enregistrées en direct.",
+    "madeBy": "Réalisé par"
+  },
+  "trials": {
+    "title": "Essais",
+    "new": "Nouvel essai",
+    "emptyTitle": "Aucun essai pour l'instant",
+    "emptyText": "Créez un essai pour commencer à enregistrer des mesures.",
+    "searchLabel": "Rechercher des essais",
+    "searchPlaceholder": "Rechercher par titre ou sujet",
+    "noMatch": "Aucun essai ne correspond à « {search} ».",
+    "columns": {
+      "title": "Titre",
+      "subject": "Sujet",
+      "status": "État",
+      "created": "Créé le"
+    },
+    "created": "Créé le {date}",
+    "back": "Essais",
+    "edit": "Modifier"
+  },
+  "status": {
+    "created": "Non démarré",
+    "recording": "En cours",
+    "paused": "Arrêté",
+    "completed": "Sauvegardé"
+  },
+  "subject": {
+    "age": "{age, plural, one {# an} other {# ans}}"
+  },
+  "sex": {
+    "female": "Femme",
+    "male": "Homme",
+    "other": "Autre"
+  },
+  "form": {
+    "newTitle": "Nouvel essai",
+    "editTitle": "Modifier l'essai",
+    "title": "Titre",
+    "description": "Description",
+    "optional": "(facultatif)",
+    "subject": "Sujet",
+    "name": "Nom",
+    "age": "Âge",
+    "sex": "Sexe",
+    "culture": "Culture",
+    "cancel": "Annuler",
+    "create": "Créer l'essai",
+    "creating": "Création…",
+    "save": "Enregistrer les modifications",
+    "saving": "Enregistrement…"
+  },
+  "controls": {
+    "device": "Appareil",
+    "waitingForDevice": "En attente d'un appareil…",
+    "start": "Démarrer l'acquisition",
+    "resume": "Reprendre",
+    "stop": "Arrêter",
+    "stopAndSave": "Arrêter et sauvegarder",
+    "save": "Sauvegarder"
+  },
+  "measurements": {
+    "raw": {
+      "title": "Données brutes",
+      "caption": "Telles que reçues de l'appareil"
+    },
+    "processed": {
+      "title": "Données traitées",
+      "caption": "Calculées par le serveur"
+    },
+    "show": "Afficher",
+    "hide": "Masquer",
+    "waiting": "En attente de données…",
+    "noData": "Aucune donnée.",
+    "live": "En direct",
+    "connecting": "Connexion…"
+  },
+  "kinds": {
+    "heart_rate": "Fréquence cardiaque",
+    "spo2": "SpO₂",
+    "breathing_rate": "Fréquence respiratoire",
+    "sweat": "Sudation",
+    "gsr": "Conductance cutanée",
+    "heart_rate_stats": "Fréquence cardiaque, fenêtre de 30 s",
+    "spo2_stats": "SpO₂, fenêtre de 30 s"
+  },
+  "fields": {
+    "value": "Valeur",
+    "mean": "Moyenne",
+    "min": "Min",
+    "max": "Max",
+    "std": "Écart type",
+    "count": "Échantillons",
+    "rejected": "Rejetés"
+  },
+  "errors": {
+    "titleRequired": "Le titre est obligatoire.",
+    "invalid": "Certains champs sont invalides.",
+    "conflict": "Cette action est impossible dans l'état actuel de l'essai, ou l'appareil est déjà utilisé.",
+    "unexpected": "Le serveur de traitement a renvoyé une erreur inattendue.",
+    "notFound": "Introuvable",
+    "backToTrials": "Retour aux essais",
+    "genericTitle": "Une erreur est survenue",
+    "serverDown": "Le serveur de traitement est-il démarré ?",
+    "retry": "Réessayer",
+    "wrongPassword": "Mot de passe incorrect.",
+    "unauthorized": "Le mode opérateur a expiré. Déverrouillez-le à nouveau."
+  },
+  "operator": {
+    "operator": "Opérateur",
+    "title": "Mode opérateur",
+    "hint": "Nécessaire pour créer, modifier, démarrer et arrêter des essais. Regarder ne nécessite rien.",
+    "password": "Mot de passe",
+    "unlock": "Déverrouiller",
+    "lock": "Verrouiller",
+    "lockHint": "Quitter le mode opérateur",
+    "close": "Fermer",
+    "required": "Le mode opérateur est nécessaire.",
+    "requiredHint": "Déverrouillez-le avec le cadenas en haut à droite."
+  },
+  "live": {
+    "title": "En direct",
+    "device": "Appareil {device}",
+    "open": "Ouvrir l'essai"
+  }
+}
