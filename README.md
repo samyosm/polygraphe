@@ -5,7 +5,7 @@ GSR sensors, used as an experimental "lie detector".
 
 | Part | |
 | --- | --- |
-| `firmware/` (to come) | The device. Streams measurements over WiFi to the backend. |
+| [`device/`](device) | ESP8266/ESP32 firmware (PlatformIO): reads the sensors, streams measurements over WiFi to the backend. |
 | [`backend/`](backend) | FastAPI processing server: ingestion, storage (InfluxDB + SQLite), processing, trials. |
 | [`frontend/`](frontend) | Next.js interface: trials, real-time charts, lookup. |
 
