@@ -6,6 +6,11 @@ interface KindConfig {
   unit?: string;
   /** Fields to plot, in order; the first one is the headline value. Default: all of them. */
   fields?: string[];
+  /**
+   * For values that move around zero: a y-axis symmetric about 0, at least this wide on
+   * each side, so noise does not fill the chart and a real change stands out.
+   */
+  centered?: number;
 }
 
 /**
@@ -19,9 +24,12 @@ const KINDS: Record<string, KindConfig> = {
   spo2: { unit: "%" },
   breathing_rate: { unit: "/min" },
   sweat: {},
-  gsr: { unit: "µS" },
+  // Resistance and voltage are also stored, but on the same axis they dwarf conductance.
+  gsr: { unit: "µS", fields: ["conductance"] },
   heart_rate_stats: { unit: "bpm", fields: ["mean", "min", "max"] },
   spo2_stats: { unit: "%", fields: ["mean", "min"] },
+  gsr_level: { unit: "µS", fields: ["level", "baseline"] },
+  gsr_variation: { unit: "µS", fields: ["change"], centered: 0.1 },
 };
 
 const ORDER = Object.keys(KINDS);
@@ -37,6 +45,7 @@ export interface FieldDisplay {
 export interface KindDisplay {
   label: string;
   unit?: string;
+  centered?: number;
   fields: FieldDisplay[];
 }
 
@@ -55,6 +64,7 @@ export function useKindDisplay() {
       return {
         label: translate("kinds", kind),
         unit: config?.unit,
+        centered: config?.centered,
         fields: (config?.fields ?? availableFields).map((key) => ({
           key,
           label: translate("fields", key),

@@ -12,7 +12,7 @@ def raw(client):
 def test_health(client):
     body = client.get("/health").json()
     assert body["status"] == "ok"
-    assert body["processors"] == ["heart_rate_stats", "spo2_stats"]
+    assert body["processors"] == ["heart_rate_stats", "spo2_stats", "gsr_activity"]
 
 
 @pytest.mark.parametrize("query", ["", "?token=wrong"])

@@ -95,7 +95,9 @@
     "sweat": "Sweat",
     "gsr": "Skin conductance",
     "heart_rate_stats": "Heart rate, 30 s window",
-    "spo2_stats": "SpO₂, 30 s window"
+    "spo2_stats": "SpO₂, 30 s window",
+    "gsr_level": "Skin conductance, level and baseline",
+    "gsr_variation": "Skin conductance, change from baseline"
   },
   "fields": {
     "value": "Value",
@@ -104,7 +106,12 @@
     "max": "Max",
     "std": "Standard deviation",
     "count": "Samples",
-    "rejected": "Rejected"
+    "rejected": "Rejected",
+    "level": "Level",
+    "baseline": "Baseline",
+    "change": "Change",
+    "relative": "Relative change",
+    "conductance": "Conductance"
   },
   "errors": {
     "titleRequired": "A title is required.",

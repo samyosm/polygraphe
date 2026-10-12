@@ -15,6 +15,7 @@ const formatTime = uPlot.fmtDate("{HH}:{mm}:{ss}");
 interface Props {
   series: Series;
   fields: FieldDisplay[];
+  centered?: number;
   live: boolean;
 }
 
@@ -22,7 +23,7 @@ interface Props {
  * uPlot is used imperatively: data goes from the store to the canvas without going
  * through React, at most once per animation frame.
  */
-export function TimeSeriesChart({ series, fields, live }: Props) {
+export function TimeSeriesChart({ series, fields, centered, live }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
   const plotRef = useRef<uPlot>(null);
   const liveRef = useRef(live);
@@ -41,6 +42,7 @@ export function TimeSeriesChart({ series, fields, live }: Props) {
       fields,
       readChartTheme(container),
       liveRef,
+      centered,
     );
     const plot = new uPlot(options, data(), container);
     plotRef.current = plot;
@@ -64,7 +66,7 @@ export function TimeSeriesChart({ series, fields, live }: Props) {
       plot.destroy();
       plotRef.current = null;
     };
-  }, [series, fields]);
+  }, [series, fields, centered]);
 
   // Switching between following the live window and showing everything.
   useEffect(() => {
@@ -83,6 +85,7 @@ function buildOptions(
   fields: FieldDisplay[],
   theme: ChartTheme,
   liveRef: { current: boolean },
+  centered?: number,
 ): uPlot.Options {
   const axis: uPlot.Axis = {
     stroke: theme.axis,
@@ -106,6 +109,14 @@ function buildOptions(
           return liveRef.current ? [max - LIVE_WINDOW_S, max] : [min, max];
         },
       },
+      ...(centered !== undefined && {
+        y: {
+          range: (_: uPlot, min: number, max: number): uPlot.Range.MinMax => {
+            const half = Math.max(centered, Math.abs(min), Math.abs(max)) * 1.1;
+            return [-half, half];
+          },
+        },
+      }),
     },
     axes: [
       {

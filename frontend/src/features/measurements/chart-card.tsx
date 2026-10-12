@@ -55,7 +55,12 @@ export function ChartCard({ series, live }: { series: Series; live: boolean }) {
           )}
         </p>
       </header>
-      <TimeSeriesChart series={series} fields={display.fields} live={live} />
+      <TimeSeriesChart
+        series={series}
+        fields={display.fields}
+        centered={display.centered}
+        live={live}
+      />
     </section>
   );
 }

@@ -95,7 +95,9 @@
     "sweat": "Sudation",
     "gsr": "Conductance cutanée",
     "heart_rate_stats": "Fréquence cardiaque, fenêtre de 30 s",
-    "spo2_stats": "SpO₂, fenêtre de 30 s"
+    "spo2_stats": "SpO₂, fenêtre de 30 s",
+    "gsr_level": "Conductance cutanée, niveau et ligne de base",
+    "gsr_variation": "Conductance cutanée, variation par rapport à la ligne de base"
   },
   "fields": {
     "value": "Valeur",
@@ -104,7 +106,12 @@
     "max": "Max",
     "std": "Écart type",
     "count": "Échantillons",
-    "rejected": "Rejetés"
+    "rejected": "Rejetés",
+    "level": "Niveau",
+    "baseline": "Ligne de base",
+    "change": "Variation",
+    "relative": "Variation relative",
+    "conductance": "Conductance"
   },
   "errors": {
     "titleRequired": "Le titre est obligatoire.",

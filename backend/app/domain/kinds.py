@@ -15,3 +15,5 @@ GSR = "gsr"
 # Processed kinds, produced by processors.
 HEART_RATE_STATS = "heart_rate_stats"
 SPO2_STATS = "spo2_stats"
+GSR_LEVEL = "gsr_level"
+GSR_VARIATION = "gsr_variation"

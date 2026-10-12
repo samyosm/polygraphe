@@ -4,7 +4,11 @@ from app.bus import StoredMeasurements
 from app.domain import Measurement, Stage, kinds
 from app.domain.measurement import utc_now
 from app.processing import ProcessingContext, ProcessingEngine
-from app.processing.processors import HeartRateStatsProcessor, SpO2StatsProcessor
+from app.processing.processors import (
+    GsrActivityProcessor,
+    HeartRateStatsProcessor,
+    SpO2StatsProcessor,
+)
 
 
 def samples(kind, values, device="dev", end=None):
@@ -70,3 +74,39 @@ async def test_engine_only_runs_for_devices_with_new_data(repository):
     engine.on_measurements(StoredMeasurements(Stage.RAW, samples(kinds.HEART_RATE, [70])))
     await engine.run_pending(processor)
     assert len(repository.all(Stage.PROCESSED)) == 1
+
+
+def gsr_samples(values, device="dev", end=None):
+    end = end or utc_now()
+    return [
+        Measurement(
+            kinds.GSR,
+            device,
+            {"conductance": v, "resistance": 1e6 / v, "voltage": 1200.0},
+            end - timedelta(seconds=(len(values) - i) * 0.1),
+        )
+        for i, v in enumerate(values)
+    ]
+
+
+def test_gsr_activity_is_flat_at_rest():
+    level, variation = GsrActivityProcessor().process(gsr_samples([4.0] * 50))
+    assert (level.kind, variation.kind) == (kinds.GSR_LEVEL, kinds.GSR_VARIATION)
+    assert level.fields["level"] == level.fields["baseline"] == 4.0
+    assert variation.fields["change"] == 0
+    assert variation.fields["relative"] == 0
+
+
+def test_gsr_activity_shows_a_response_above_the_baseline():
+    # A long stretch at 4 µS, then a burst to 5 µS in the last second.
+    _, variation = GsrActivityProcessor().process(gsr_samples([4.0] * 590 + [5.0] * 10))
+    assert 0.2 < variation.fields["change"] < 1.0
+    assert variation.fields["relative"] > 5
+
+
+def test_gsr_activity_ignores_samples_without_conductance_and_waits_for_enough_data():
+    out_of_range = [Measurement.single(kinds.GSR, "dev", 0) for _ in range(20)]
+    for m in out_of_range:
+        assert "conductance" not in m.fields
+    assert GsrActivityProcessor().process(out_of_range) == []
+    assert GsrActivityProcessor().process(gsr_samples([4.0] * 3)) == []
